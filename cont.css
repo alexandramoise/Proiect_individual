@@ -1,0 +1,28 @@
+body{
+    background-color: #EEA9E9;
+}
+table {
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 1.5em;
+min-width: 400px;
+background: white;
+border-bottom: 2px solid #B51895;
+overflow: hidden;
+box-shadow: 0 0 20px #CF3AC0;
+margin-left: auto;  
+margin-right: auto; 
+}
+thead tr {
+color: white;
+text-align: left;
+font-weight: bold;
+}
+th, td {
+padding: 12px 15px; 
+color: black;
+}
+th{
+text-align: center;
+color: #cc0099;
+}

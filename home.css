@@ -1,0 +1,69 @@
+body{
+    background-color: #EEA9E9;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.5em;
+    min-width: 400px;
+    background: white;
+    boder-radius: 5px 5px 0 0;
+    overflow: hidden;
+    margin-left: auto;  
+    margin-right: auto; 
+}
+
+tr {
+    background-color: #EEA9E9;
+    color: black;
+    text-align: left;
+    font-weight: bold;
+}
+
+th, td {
+    text-align: center;
+}
+        
+.rol {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.fct {
+   display: block;
+   flex-grow: 0;
+   flex-shrink: 1;
+   flex-basis: auto;
+   align-self: auto;
+   order: 0;
+   font-family: arial;
+   color: #FFFFFF;
+   font-size: 14px;
+   text-shadow: 1px 1px 0px #DE71CC;
+   box-shadow: 1px 1px 1px #F97AE0;
+   padding: 10px 25px;
+   border-radius: 10px;
+   border: 2px solid #e41beb;
+   background: #EE56E4;
+   background: linear-gradient(to top, #EE56E4, #CF3AC0);
+}
+
+.fct:hover {
+   color: #B51895;
+   background: #FFD9F7;
+   background: linear-gradient(to top, #FFD9F7, #EEA9E9);
+}
+
+a:link, a:visited, a:active {
+   color:white;
+}
+
+a:hover {
+    color: #B51895;
+}
+
