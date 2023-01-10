@@ -1,5 +1,8 @@
 <?php 
 require 'dbconection.php';
+
+include 'menu.html';
+
 if(isset($_POST["submit"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -13,8 +16,8 @@ if(isset($_POST["submit"])) {
             $_SESSION["login"] = true;
             $id_client = $row["id"];
             echo "<script> alert('Client $id_client conectat cu succes! '); </script>";
-            header("Location: products.php");
-
+            $_SESSION["username"] = $row["username"]; 
+            header("Location: logged.php");
         }
         else {
             echo "<script> alert('Parola nu corespunde contului introdus :( '); </script>";
@@ -39,6 +42,9 @@ if(isset($_POST["register"])) {
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="cont.css">
 
+     <style>
+        a { text-decoration: none; }
+    </style>
  </head>
  <body>
 

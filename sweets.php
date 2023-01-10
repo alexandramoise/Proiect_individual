@@ -1,22 +1,43 @@
 <?php
-function pieces_bought($name,$nr) {
-  echo "<script> alert('Produsul $name a fost adaugat in cos in cantitatea de $nr bucati'); </script>";
+function pieces_bought($user,$name,$nr) {
+    echo "<script> alert('Utilizatorul * $user * a adaugat produsul ~ $name ~ in cos in cantitatea de $nr bucati'); </script>";
 }
 
 require 'dbconection.php';
 
 $cake = '';
-if(isset($_POST["buy"])) {
+if(isset($_POST["buy"])  && $_POST["quantity"] > 0)
+  if(isset($_SESSION["username"])) {
+  $user = $_SESSION["username"];
   $result = mysqli_query($conn,"SELECT * FROM cakes");
+  
   if($result->num_rows > 0) {
       while($row = $result->fetch_assoc())
-        if($row['id'] == $_POST["code"])
+        if($row['id'] == $_POST["code"]) {
           $cake = $row['name'];
-  }
-    pieces_bought($cake,$_POST["quantity"]);
-}
-
+          if($row['pieces'] > 0) {
+            $pieces = $_POST["quantity"];
+            $still = $row['pieces'] - $_POST["quantity"];
+            $cod = $_POST["code"];
+            $price = $row['price'] * $pieces;
+            pieces_bought($_SESSION["username"],$cake,$_POST["quantity"]);
+            $already = mysqli_query($conn,"SELECT * FROM cart WHERE product_id = $cod");
+            if($already->num_rows > 0)
+               { $buy = "UPDATE cart set quantity = quantity + $pieces WHERE product_id = $cod"; }
+            else
+               { $buy ="INSERT INTO cart VALUES('$user','$cod', '$cake', '$pieces', '$price')"; }
+            mysqli_query($conn, $buy);
+            $update_product = mysqli_query($conn,"UPDATE cakes SET pieces = $still WHERE id = $cod");
+           }
+          else
+            echo "<script> alert('Produsul $cake nu e disponibil momentan') </script>";  
+        }
+      }
+    }
+    else
+      echo "<script> alert('Trebuie sa te conectezi pt a cumpara'); </script>";
 ?>
+
 
 
 <html>
@@ -27,6 +48,7 @@ if(isset($_POST["buy"])) {
         }
 a{
   text-decoration: none;
+  color: purple;
 }
 .cards{
   text-align: center;
@@ -58,6 +80,11 @@ a{
     text-align: center;
     font-size: 16px;
     border-radius: 8px;
+}
+
+.button:hover {
+    background-color: purple;
+    color: yellow;
 }
 
 .quantity{
